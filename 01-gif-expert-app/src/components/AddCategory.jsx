@@ -12,8 +12,8 @@ const AddCategory = ({ setCategories }) => {
 		e.preventDefault();
 		if (inputValue.trim() === "") return null;
 
-        setCategories((category) => [...category, inputValue]);
-        setInputValue("")
+		setCategories((category) => [inputValue, ...category]);
+		setInputValue("");
 	};
 
 	return (
@@ -26,7 +26,6 @@ const AddCategory = ({ setCategories }) => {
 		</form>
 	);
 };
-
 
 export default AddCategory;
 
