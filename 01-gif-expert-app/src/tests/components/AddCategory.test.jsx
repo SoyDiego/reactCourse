@@ -8,7 +8,7 @@ describe("Pruebas en el <AddCategory/>", () => {
 	let wrapper = shallow(<AddCategory setCategories={setCategories} />);
 
 	beforeEach(() => {
-		jest.clearAllMocks;
+		jest.clearAllMocks();
 		wrapper = shallow(<AddCategory setCategories={setCategories} />);
 	});
 
@@ -26,5 +26,15 @@ describe("Pruebas en el <AddCategory/>", () => {
 	test("NO debe de postear la informacion con SUBMIT", () => {
 		wrapper.find("form").simulate("submit", { preventDefault() {} });
 		expect(setCategories).not.toHaveBeenCalled();
+	});
+
+	test("Debe de llamar el setCategories y limpiar la caja de texto", () => {
+		const value = "Hola Mundo";
+		wrapper.find("input").simulate("change", { target: { value } });
+
+		wrapper.find("form").simulate("submit", { preventDefault() {} });
+		expect(setCategories).toHaveBeenCalled();
+
+		expect(wrapper.find("input").prop("value")).toBe("");
 	});
 });
