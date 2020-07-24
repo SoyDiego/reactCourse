@@ -32,9 +32,14 @@ const useFetch = (url) => {
 						error: null,
 						data: data,
 					});
-				} else {
-					console.log("SetState no se llamó");
 				}
+			})
+			.catch((error) => {
+				setState({
+					data: null,
+					loading: false,
+					error: "No se pudo cargar la info",
+				});
 			});
 	}, [url]);
 
