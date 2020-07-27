@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import getHeroById from "../../selectors/getHeroById";
 
 const HeroScreen = ({ history }) => {
 	const { heroeId } = useParams();
 
-	const hero = getHeroById(heroeId);
+	const hero = useMemo(() => getHeroById(heroeId), [heroeId]);
+	// const hero = getHeroById(heroeId);
 
 	if (!hero) return <Redirect to="/" />;
 
@@ -26,7 +27,7 @@ const HeroScreen = ({ history }) => {
 				<img
 					src={`../assets/heroes/${heroeId}.jpg`}
 					alt={superhero}
-					className="img-thumbnail"
+					className="img-thumbnail animate__animated animate__fadeInLeft"
 				/>
 			</div>
 
