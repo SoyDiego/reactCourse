@@ -1,9 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import "@testing-library/jest-dom";
-import { AuthContext } from "../../../auth/AuthContext";
-import { MemoryRouter, Router } from "react-router-dom";
-import { types } from "../../../types/types";
+import { MemoryRouter } from "react-router-dom";
 import HeroScreen from "../../../components/heroes/HeroScreen";
 
 describe("Pruebas en el componente <HeroScreen/>", () => {
