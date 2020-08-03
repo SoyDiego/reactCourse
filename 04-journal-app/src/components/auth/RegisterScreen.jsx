@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import validator from "validator";
+import { useDispatch, useSelector } from "react-redux";
+import { setError, removeError } from "../../actions/ui";
 
 export const RegisterScreen = () => {
 	const [formValues, handleInputChange] = useForm({
@@ -12,6 +14,9 @@ export const RegisterScreen = () => {
 	});
 	const { name, email, password, password2 } = formValues;
 
+	const dispatch = useDispatch();
+	const { msgError } = useSelector((state) => state.ui);
+
 	const handleRegister = (e) => {
 		e.preventDefault();
 		if (isFormValid()) {
@@ -21,17 +26,21 @@ export const RegisterScreen = () => {
 
 	const isFormValid = () => {
 		if (name.trim().length === 0) {
-			console.log("Name is required");
+			dispatch(setError("Name is Required."));
 			return false;
 		} else if (!validator.isEmail(email)) {
-			console.log("Valid email is required");
+			dispatch(setError("Valid email is required"));
 			return false;
 		} else if (password !== password2 || password.length < 6) {
-			console.log(
-				"Password should be at least 6 characters and match each other."
+			dispatch(
+				setError(
+					"Password should be at least 6 characters and match each other."
+				)
 			);
 			return false;
 		}
+
+		dispatch(removeError());
 		return true;
 	};
 
@@ -39,7 +48,9 @@ export const RegisterScreen = () => {
 		<>
 			<h3 className="auth__title">Register</h3>
 			<form onSubmit={handleRegister}>
-				<div className="auth__alert-error">Hola Mundo</div>
+				{msgError && (
+					<div className="auth__alert-error">{msgError}</div>
+				)}
 				<input
 					className="auth__input"
 					type="text"
