@@ -14,7 +14,7 @@ export const Sidebar = () => {
 		<aside className="journal__sidebar">
 			<div className="journal__sidebar-navbar">
 				<h3 className="mt-5">
-					<i class="fa fa-moon" />
+					<i className="fa fa-moon" />
 					<span> Diego</span>
 				</h3>
 
@@ -24,7 +24,7 @@ export const Sidebar = () => {
 			</div>
 
 			<div className="journal__new-entry">
-				<i class="far fa-calendar-plus fa-5x" />
+				<i className="far fa-calendar-plus fa-5x" />
 				<p className="mt-5">New Entry</p>
 			</div>
 
