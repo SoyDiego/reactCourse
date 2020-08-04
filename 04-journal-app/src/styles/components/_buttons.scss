@@ -14,8 +14,6 @@
     &:hover {
         color: darken($color: white, $amount: 10);
     }
-
-
 }
 
 .btn-primary {
@@ -23,7 +21,7 @@
     border-radius: 2px;
 
     &:disabled {
-        background-color: lighten($color: $primary, $amount: 1)
+        background-color: lighten($color: $primary, $amount: 30)
     }
 
     &:hover {
