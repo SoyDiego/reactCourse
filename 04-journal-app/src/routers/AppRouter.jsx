@@ -8,6 +8,7 @@ import { login } from "../actions/auth";
 import { useState } from "react";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import { startLoadingNotes } from "../actions/notes";
 
 export const AppRouter = () => {
 	const dispatch = useDispatch();
@@ -17,10 +18,12 @@ export const AppRouter = () => {
 
 	//Mantiene el usuario autenticado
 	useEffect(() => {
-		firebase.auth().onAuthStateChanged((user) => {
+		firebase.auth().onAuthStateChanged(async (user) => {
 			if (user?.uid) {
 				dispatch(login(user.uid, user.displayName));
 				setIsLoggedIn(true);
+
+				dispatch(startLoadingNotes(user.uid));
 			} else {
 				setIsLoggedIn(false);
 			}
