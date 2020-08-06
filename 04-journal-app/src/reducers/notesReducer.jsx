@@ -1,4 +1,5 @@
 import { types } from "../types/types";
+import { startSaveNote } from "../actions/notes";
 
 const initialState = {
 	notes: [],
@@ -17,6 +18,13 @@ export const notesReducer = (state = initialState, action) => {
 			return {
 				...state,
 				notes: [...action.payload],
+			};
+		case types.notesUpdated:
+			return {
+				...state,
+				notes: state.notes.map((note) =>
+					note.id === action.payload.id ? action.payload.note : note
+				),
 			};
 
 		default:
