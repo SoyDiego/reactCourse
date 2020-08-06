@@ -51,10 +51,7 @@ export const NoteScreen = () => {
 
 				{url && (
 					<div className="notes__image">
-						<img
-							src="https://www.secureweek.com/wp-content/uploads/2019/11/Linux-990x559.jpg"
-							alt="imagen"
-						/>
+						<img src={url} alt="imagen" />
 					</div>
 				)}
 			</div>
