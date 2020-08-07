@@ -1,5 +1,4 @@
 import { types } from "../types/types";
-import { startSaveNote } from "../actions/notes";
 
 const initialState = {
 	notes: [],
@@ -25,6 +24,12 @@ export const notesReducer = (state = initialState, action) => {
 				notes: state.notes.map((note) =>
 					note.id === action.payload.id ? action.payload.note : note
 				),
+			};
+		case types.notesDelete:
+			return {
+				...state,
+				active: null,
+				notes: state.notes.filter((note) => note.id !== action.payload),
 			};
 
 		default:
