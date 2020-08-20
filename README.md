@@ -15,3 +15,11 @@ Demo: https://gifexpertapp-reactjs.netlify.app/
 Demo: https://heroes-reactjs.netlify.app/
 
 ![Screenshot](https://i.imgur.com/KO70Ntg.png)
+
+## 2 - JournalApp
+
+-   Used Redux & Firebase
+
+Demo: https://journal-app-reactjs.netlify.app/
+
+![Screenshot](https://i.imgur.com/nsHXp1Q.png)
