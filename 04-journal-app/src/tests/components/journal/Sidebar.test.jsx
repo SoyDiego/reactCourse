@@ -4,7 +4,6 @@ import "@testing-library/jest-dom";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { act } from "@testing-library/react";
 import { startLogout } from "../../../actions/auth";
 import { startNewNote } from "../../../actions/notes";
 import { Sidebar } from "../../../components/journal/Sidebar";
