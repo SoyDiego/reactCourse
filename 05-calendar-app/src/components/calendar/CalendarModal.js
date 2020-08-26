@@ -5,6 +5,7 @@ import DateTimePicker from "react-datetime-picker";
 import Swal from "sweetalert2";
 import { useSelector, useDispatch } from "react-redux";
 import { uiCloseModal } from "../../actions/ui";
+import { eventAddNew } from "../../actions/events";
 
 const customStyles = {
 	content: {
@@ -81,9 +82,23 @@ export const CalendarModal = () => {
 			);
 		}
 
-		if (title.trim.length < 2) {
+		if (title.trim().length < 2) {
 			return setTitleValid(false);
 		}
+
+
+		//Add new Event
+		dispatch(
+			eventAddNew({
+				...formValues,
+				id: new Date().getTime(),
+				user: {
+					_id: '123',
+					name: 'Diego'
+				}
+			})
+		);
+
 		setTitleValid(true);
 		closeModal();
 	};
