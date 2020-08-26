@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import moment from "moment";
 import DateTimePicker from "react-datetime-picker";
 import Swal from "sweetalert2";
 import { useSelector, useDispatch } from "react-redux";
 import { uiCloseModal } from "../../actions/ui";
-import { eventAddNew } from "../../actions/events";
+import { eventAddNew, eventClearActiveEvent } from "../../actions/events";
 
 const customStyles = {
 	content: {
@@ -20,8 +20,15 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const now = moment().minutes(0).seconds(0).add(1, "hours");
+const now = moment().minutes(0).seconds(0).add(1, "hours"); // 3:00:00
 const nowPlus1 = now.clone().add(1, "hours");
+
+const initEvent = {
+	title: "",
+	notes: "",
+	start: now.toDate(),
+	end: nowPlus1.toDate(),
+};
 
 // START Component
 export const CalendarModal = () => {
@@ -29,17 +36,20 @@ export const CalendarModal = () => {
 	const [dateEnd, setDateEnd] = useState(nowPlus1.toDate());
 	const [titleValid, setTitleValid] = useState(true);
 	const { modalOpen } = useSelector((state) => state.ui);
+	const { activeEvent } = useSelector((state) => state.calendar);
 
 	const dispatch = useDispatch();
 
-	const [formValues, setFormValues] = useState({
-		title: "Evento",
-		notes: "",
-		start: now.toDate(),
-		end: nowPlus1.toDate(),
-	});
+	const [formValues, setFormValues] = useState(initEvent);
 
 	const { title, notes, start, end } = formValues;
+
+	//Cuando hay cambios....
+	useEffect(() => {
+		if (activeEvent) {
+			setFormValues(activeEvent);
+		}
+	}, [activeEvent, setFormValues]);
 
 	const handleInputChange = ({ target }) => {
 		setFormValues({
@@ -50,6 +60,9 @@ export const CalendarModal = () => {
 
 	const closeModal = () => {
 		dispatch(uiCloseModal());
+		dispatch(eventClearActiveEvent());
+		//Limpia el form
+		setFormValues(initEvent);
 	};
 
 	const handleStartDateChange = (e) => {
@@ -86,16 +99,15 @@ export const CalendarModal = () => {
 			return setTitleValid(false);
 		}
 
-
 		//Add new Event
 		dispatch(
 			eventAddNew({
 				...formValues,
 				id: new Date().getTime(),
 				user: {
-					_id: '123',
-					name: 'Diego'
-				}
+					_id: "123",
+					name: "Diego",
+				},
 			})
 		);
 
