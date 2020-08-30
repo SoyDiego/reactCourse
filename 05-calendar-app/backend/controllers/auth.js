@@ -73,7 +73,7 @@ const loginUsuario = async (req, res = response) => {
 			ok: true,
 			uid: usuario.id,
 			name: usuario.name,
-			token
+			token,
 		});
 	} catch (error) {
 		console.log(error);
@@ -84,10 +84,15 @@ const loginUsuario = async (req, res = response) => {
 	}
 };
 
-const revalidarToken = (req, res = response) => {
+const revalidarToken = async (req, res = response) => {
+	const { uid, name } = req;
+
+	//Generar un nuevo JWT y retornarlo.
+	const token = await generarJWT(uid, name);
+
 	res.json({
 		ok: true,
-		msg: "renew",
+		token,
 	});
 };
 
