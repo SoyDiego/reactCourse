@@ -23,4 +23,11 @@ const EventoSchema = Schema({
 	},
 });
 
+//Cambia como muestra los datos. Quita __v y modifica _id por id
+EventoSchema.method("toJSON", function () {
+	const { __v, _id, ...object } = this.toObject();
+	object.id = _id;
+	return object;
+});
+
 module.exports = model("Evento", EventoSchema);
