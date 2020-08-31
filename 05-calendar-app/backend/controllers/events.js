@@ -7,6 +7,9 @@ const getEventos = async (req, res = response) => {
 	});
 };
 const crearEvento = async (req, res = response) => {
+	//Verificar que tenga el EVENTO
+	console.log(req.body);
+
 	res.status(200).json({
 		ok: true,
 		msg: "crearEvento",
