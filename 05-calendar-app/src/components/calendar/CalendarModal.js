@@ -126,7 +126,8 @@ export const CalendarModal = () => {
 			style={customStyles}
 			closeTimeoutMS={200}
 			className="modal"
-			overlayClassName="modal-fondo">
+			overlayClassName="modal-fondo"
+			ariaHideApp={!process.env.NODE_ENV === 'test'}>
 			<h1>{activeEvent ? "Editar evento" : "Nuevo evento"}</h1>
 			<hr />
 			<form onSubmit={handleSubmitForm} className="container">
